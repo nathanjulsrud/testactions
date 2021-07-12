@@ -12,8 +12,16 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      release:
+          description: 'github link to raw manifest (ex internal-dev, internal-test, release)'
+          required: true
   repository_dispatch:
     types: [nate-event]
+
+env:
+    RELEASE: ${{ github.event.inputs.release || github.event.client_payload.release  }}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -33,5 +41,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "release variable ${RELEASE}"
