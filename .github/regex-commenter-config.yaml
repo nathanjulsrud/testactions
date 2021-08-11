@@ -1,0 +1,19 @@
+defaults:
+  # the default comment if the PR diff matches any of the given regexes
+  comment: "please take a look, @paramsingh"
+
+matches:
+  # An optional description of the regular expression
+- description: "Comments on each pylint-disable in the pull request"
+
+  # The regular expression that regex-commenter should match the diff against
+  regex: ".*pylint: disable*"
+
+  # The comment that regex-commenter will make if the diff matches this regex,
+  comment: "Please don't disable 'pylint' checks."
+
+- regex: ".*DANGEROUSLY_do_something*"
+  comment: "cc @ferbncode, dangerous code change"
+
+- regex: ".*LOG_LEVEL=*" # no comment specified, uses default comment.
+
